@@ -30,7 +30,7 @@ public class 					CodilityPlayaR 						{
 		
 		
 		try {
-				classe 			= System.class.forName(classToTest);
+				classe 			= Class.forName(classToTest);
 				Method testMthd = classe.getMethod("solution", paramsType);
 				Object solution = classe.newInstance();
 				
@@ -65,7 +65,7 @@ public class 					CodilityPlayaR 						{
 										,0x20000000,0x20000001
 										,0x40000000,0x40000001
 										};
-				ArrayList reslts	=	new ArrayList();
+				ArrayList<Integer> reslts	=	new ArrayList<Integer>();
 				
 				for (int i=0; i<testSuite.length; i++) {
 				 int res= (int) testMthd.invoke(solution, testSuite[i]);
