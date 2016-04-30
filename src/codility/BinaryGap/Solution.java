@@ -23,7 +23,7 @@ package codility.BinaryGap;
 	              gap = (gap >= currGap) ? gap : currGap;   // if current gap > gap use it
 	              currGap = 0;                              // reset currGap
 	            }    
-	            if (0 == (N & ~mask)) break;               // we are done!
+	            if (0 == (N & mask-1)) break;               // we are done!
 	            mask>>>=1;
 	        }    
 	        return gap;
