@@ -6,7 +6,7 @@ package codility.BinaryGap;
 	// you can write to stdout for debugging purposes, e.g.
 	// System.out.println("this is a debug message");
 
-	class Solution {
+	public class Solution {
 	    public int solution(int N) {
 	        int mask    =   0x80000000
 	        ,   gap     =   0
