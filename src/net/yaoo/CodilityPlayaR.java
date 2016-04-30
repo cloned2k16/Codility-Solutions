@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class 					CodilityPlayaR 						{
 
@@ -22,7 +23,8 @@ public class 					CodilityPlayaR 						{
 	 	out.println(msg);
 	}
 
-	public static void 			main								(String[] args) 				{
+	public static void 			main								(String[] args) 
+			throws 				Exception 															{
 		log("here we go");
 
 		String 		classToTest 	=	"codility.BinaryGap.Solution";
@@ -73,6 +75,24 @@ public class 					CodilityPlayaR 						{
 				}
 				
 				log(reslts);
+				
+				Method testMthd_org = classe.getMethod("solution_org", paramsType);
+				
+				Timer t1=new Timer("solution_org");
+				t1.start();
+				for (int i=0 ; i< Integer.MAX_VALUE; i++) {
+					testMthd_org.invoke(solution, i);			
+				}
+				t1.end();
+				log(t1);
+				
+				Timer t2=new Timer("solution");
+				t2.start();
+				for (int i=0 ; i< Integer.MAX_VALUE; i++) {
+					testMthd.invoke(solution, i);			
+				}
+				t2.end();
+				log(t2);
 		} 
 		catch 		( ClassNotFoundException 	e) 		{
 			log(e);
@@ -100,3 +120,33 @@ public class 					CodilityPlayaR 						{
 
 
 }
+
+	class						Timer								{
+		public					Timer	(String label)				{
+			this.label = label;
+		}
+		private	String			label;
+		private	long			st=-1
+				,				en=0;
+		private long 			ellapsed = -1;
+		
+		public	void			start	()							{
+			st=System.currentTimeMillis();
+		}
+		
+		public long				end		() 
+				throws 			Exception							{
+			if (-1==st) throw new Exception("timer not started yet!");
+			en=System.currentTimeMillis();
+			ellapsed=en-st;
+			return ellapsed;
+		}
+		
+		public long				getTime ()							{
+			return ellapsed;
+		}
+		
+		public String			toString()							{
+			return String.format("T:%s::(%f) sec.",label,(float)ellapsed/1000);
+		}
+	}
