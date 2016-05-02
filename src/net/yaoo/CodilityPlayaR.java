@@ -1,9 +1,11 @@
 package net.yaoo;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class 					CodilityPlayaR 						{
@@ -12,13 +14,23 @@ public class 					CodilityPlayaR 						{
 	private static PrintStream  out		=	System.out;
 
 	
-	private static void 		log									(Object  ...args) 				{
+	public static void 		log									(Object  ...args) 				{
 	 String fmt = "[";
 	 for(int i=0; i<args.length; i++) fmt+=((i==0)?"":",")+"%s";
 	 log(fmt+"]",args);
 	}
 	
-	private static void 		log									(String fmt, Object  ...args) 	{
+	public static void 		log									(String fmt, Object  ...args) 	{
+		for (int n=0; n<args.length; n++) {
+			Object o=args[n];
+			if (o instanceof int[]) 	args[n] = Arrays.toString((int[])o);
+			if (o instanceof Exception) {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				PrintStream 			ps = new PrintStream(baos);
+				((Throwable)o).printStackTrace(ps);
+				args[n] = baos.toString();
+			}
+		}
 	 	String msg = String.format(fmt, args);
 	 	out.println(msg);
 	}
@@ -77,7 +89,7 @@ public class 					CodilityPlayaR 						{
 				log(reslts);
 				
 				Method testMthd_org = classe.getMethod("solution_org", paramsType);
-				
+if (false){				
 				Timer t1=new Timer("solution_org");
 				t1.start();
 				for (int i=0 ; i< Integer.MAX_VALUE; i++) {
@@ -85,14 +97,50 @@ public class 					CodilityPlayaR 						{
 				}
 				t1.end();
 				log(t1);
-				
+}				
 				Timer t2=new Timer("solution");
 				t2.start();
-				for (int i=0 ; i< Integer.MAX_VALUE; i++) {
+				for (int i=0 ; i< Integer.MAX_VALUE>>8; i++) {
 					testMthd.invoke(solution, i);			
 				}
 				t2.end();
 				log(t2);
+				
+				int a[] = null;
+				
+				classToTest 	=	"codility.CyclicRotation.Solution";
+				paramsType		= (Class<?>[]) new Class<?>[] {  Class.forName("[I"),int.class };
+				
+				classe 			= Class.forName(classToTest);
+				testMthd 		= classe.getMethod("solution"	, paramsType);
+				solution 		= classe.newInstance();
+ 		 Method testMthd_brute  = classe.getMethod("brute"		, paramsType);
+
+			int ror			= 0;
+			log(testMthd.invoke(solution,  null 						,ror));
+			log(testMthd.invoke(solution,  new int [] {} 				,ror));
+			log(testMthd.invoke(solution,  new int [] {1,2,3,4,5,6,7} 	,ror++));
+			log(testMthd.invoke(solution,  new int [] {1,2,3,4,5,6} 	,ror++));
+
+ 		 		int loops = 0x800000;
+ 		 		while (0 <loops){
+ 		 		 int numEl=(int)(Math.random()*100);
+ 		 		 int el[]=new int [numEl];
+ 		 		 for (int i=0;i<numEl;i++) el[i]=(int)(Math.random()*2000-1000);
+ 		 		 int K=(int)(Math.random()*100);
+ 		 		 int [] A=(int[]) testMthd_brute.invoke(solution,  el	,K);
+ 		 		 int [] B=(int[]) testMthd		.invoke(solution,  el	,K);
+ 		 		 if (!Arrays.equals(A, B) ) {
+ 		 			 
+ 		 			 log("ERROR! %s != %s",A,B);
+ 		 			 break;
+ 		 		 }
+ 		 		 --loops;
+ 		 		}
+ 		 		
+ 		 		log("loops left: %d",loops);
+ 		 		
+
 		} 
 		catch 		( ClassNotFoundException 	e) 		{
 			log(e);
