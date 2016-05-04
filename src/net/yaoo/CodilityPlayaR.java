@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class 					CodilityPlayaR 						{
 
@@ -35,6 +34,7 @@ public class 					CodilityPlayaR 						{
 	 	out.println(msg);
 	}
 
+	@SuppressWarnings("unused")
 	public static void 			main								(String[] args) 
 			throws 				Exception 															{
 		log("here we go");
