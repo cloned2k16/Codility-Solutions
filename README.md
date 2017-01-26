@@ -1,6 +1,8 @@
-### Sharing Solutions :)
+## Sharing Solutions :)
 
-
+#### JavaScript
+* Popup     [Fibonacci                    ]   (https://github.com/cloned2k16/Codility-Solutions/blob/master/src/codility/Fibonacci.js)
+#### JAVA
  
 *  1.1      [BinaryGap                    ]   (https://codility.com/demo/results/trainingKTG788-KU5/)
 *  2.1      [CyclicRotation               ]   (https://codility.com/demo/results/trainingGV73VE-AQ4/)
@@ -11,3 +13,4 @@
 *  4.2      [PermCheck                    ]   (https://codility.com/demo/results/trainingVH6WWS-9CJ/)
 * 13.2      [Ladder                       ]   (https://codility.com/demo/results/training4YNBRW-YS6/)
       
+#### .NET (C#)
