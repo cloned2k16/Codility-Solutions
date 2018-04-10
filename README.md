@@ -1,4 +1,4 @@
-## Sharing Solutions :)
+## Sharing My Solutions :)
 
 #### JavaScript
 * Popup     [Fibonacci                    ]   (https://github.com/cloned2k16/Codility-Solutions/blob/master/src/codility/Fibonacci.js)
